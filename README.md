@@ -1,4 +1,4 @@
-# my one line collections
+# one liner collections
 
 ## Find Subdomain
 > projectdiscovery
