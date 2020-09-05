@@ -1,4 +1,4 @@
-# mybugbountytips
+# my one line collections
 
 ## Find Subdomain
 > projectdiscovery
