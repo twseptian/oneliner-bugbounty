@@ -49,7 +49,13 @@ echo "testphp.vulnweb.com" | waybackurls | httpx -silent | Gxss -c 100 -p Xss | 
 
 ## Dump In-Scope Assests from Bounty Program
 ### BugCrowd Programs
-> dwisiswant0
+> @dwisiswant0
 ```
 curl -sL https://github.com/arkadiyt/bounty-targets-data/raw/master/data/bugcrowd_data.json | jq -r '.[].targets.in_scope[] | [.target, .type] | @tsv'
+```
+
+## Recon.dev
+> @ofjaaah
+```
+curl "https://recon.dev/api/search?key=YOURAPIKEY&domain=target.com" |jq -r '.[].rawDomains[]' | sed 's/ //g' | anew |httpx -silent | xargs -I@ gospider -d 0 -s @ -c 5 -t 100 -d 5 --blacklist jpg,jpeg,gif,css,tif,tiff,png,ttf,woff,woff2,ico,pdf,svg,txt | grep -Eo '(http|https)://[^/"]+' | anew
 ```
