@@ -65,3 +65,9 @@ curl "https://recon.dev/api/search?key=YOURAPIKEY&domain=target.com" |jq -r '.[]
 ```
 wget https://raw.githubusercontent.com/arkadiyt/bounty-targets-data/master/data/domains.txt -nv ; cat domains.txt | anew | httpx -silent -threads 500 | xargs -I@ jaeles scan -s /jaeles-signatures/ -u @
 ```
+
+## Nuclei scan to bugbounty targets.
+> hack_fish
+```
+wget https://raw.githubusercontent.com/arkadiyt/bounty-targets-data/master/data/domains.txt -nv ; cat domains.txt | httpx -silent | xargs -n 1 gospider -o output -q -s ; cat output/* | egrep -o 'https?://[^ ]+' | nuclei -t ~/nuclei-templates/ -o result.txt
+```
