@@ -1,4 +1,4 @@
-# oneliner collections
+# oneliner commands for bug bounties
 
 ## Find Subdomain
 > projectdiscovery
