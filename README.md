@@ -104,6 +104,10 @@ wget https://raw.githubusercontent.com/arkadiyt/bounty-targets-data/master/data/
 ```
 wget https://raw.githubusercontent.com/arkadiyt/bounty-targets-data/master/data/domains.txt -nv ; cat domains.txt | httpx -silent | xargs -n 1 gospider -o output -s ; cat output/* | egrep -o 'https?://[^ ]+' | nuclei -t ~/nuclei-templates/ -o result.txt
 ```
+> @ofjaah
+```
+amass enum -passive -norecursive -d https://target.com -o domain ; httpx -l domain -silent -threads 10 | nuclei -t nuclei-templates -o result -timeout 30
+```
 
 ## Endpoints, by apks
 > @ofjaaah
