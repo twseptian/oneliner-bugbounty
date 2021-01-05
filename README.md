@@ -104,6 +104,10 @@ curl "https://recon.dev/api/search?key=YOURAPIKEY&domain=target.com" |jq -r '.[]
 ```
 wget https://raw.githubusercontent.com/arkadiyt/bounty-targets-data/master/data/domains.txt -nv ; cat domains.txt | anew | httpx -silent -threads 500 | xargs -I@ jaeles scan -s /jaeles-signatures/ -u @
 ```
+> @ofjaah
+```
+curl -s "https://jldc.me/anubis/subdomains/sony.com" | grep -Po "((http|https):\/\/)?(([\w.-]*)\.([\w]*)\.([A-z]))\w+" | httpx -silent -threads 300 | anew | rush -j 10 'jaeles scan -s /jaeles-signatures/ -u {}'
+```
 
 ## Nuclei scan to bugbounty targets.
 > hack_fish
