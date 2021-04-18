@@ -162,6 +162,7 @@ findomain -t DOMAIN -q | httpx -silent -threads 1000 | gau |  grep "=" | qsrepla
 
 ## Using shodan & Nuclei
 > [KingOfBugbounty](https://github.com/KingOfBugbounty/KingOfBugBountyTips)
+
 Shodan is a search engine that lets the user find specific types of computers connected to the internet, AWK Cuts the text and prints the third column. httpx is a fast and multi-purpose HTTP using -silent. Nuclei is a fast tool for configurable targeted scanning based on templates offering massive extensibility and ease of use, You need to download the nuclei templates.
 ```bash
 shodan domain DOMAIN TO BOUNTY | awk '{print $3}' | httpx -silent | nuclei -t /nuclei-templates/
@@ -169,6 +170,7 @@ shodan domain DOMAIN TO BOUNTY | awk '{print $3}' | httpx -silent | nuclei -t /n
 
 ## Using Chaos to jaeles "How did I find a critical today?.
 > [KingOfBugbounty](https://github.com/KingOfBugbounty/KingOfBugBountyTips)
+
 To chaos this project to projectdiscovery, Recon subdomains, using httpx, if we see the output from chaos domain.com we need it to be treated as http or https, so we use httpx to get the results. We use anew, a tool that removes duplicates from @TomNomNom, to get the output treated for import into jaeles, where he will scan using his templates.
 ```bash
 chaos -d domain | httpx -silent | anew | xargs -I@ jaeles scan -c 100 -s /jaeles-signatures/ -u @ 
