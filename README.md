@@ -105,7 +105,6 @@ httpx -l master.txt -silent -no-color -threads 300 -location 301,302 | awk '{pri
 cat test.txt | gf xss | sed ‘s/=.*/=/’ | sed ‘s/URL: //’ | tee testxss.txt ; dalfox file testxss.txt -b yours-xss-hunter-domain(e.g yours.xss.ht)
 ```
 
-
 ## Dump In-Scope Assests from Bounty Program
 ### BugCrowd Programs
 > @dwisiswant0
