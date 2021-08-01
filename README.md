@@ -214,6 +214,10 @@ export LHOST="http://localhost"; gau $1 | gf redirect | qsreplace "$LHOST" | xar
 
 ## Directory Listing
 
+### (Feroxbuster) common command
+```bash
+feroxbuster -u https://target.com --insecure -d 1 -e -L 4 -w /usr/share/seclists/Discovery/Web-Content/raft-large-directories.txt
+```
 ### (Feroxbuster) Multiple values
 > @epi052 or [feroxbuster](https://github.com/epi052/feroxbuster)
 ```bash
