@@ -213,6 +213,12 @@ export LHOST="http://localhost"; gau $1 | gf redirect | qsreplace "$LHOST" | xar
 ```
 
 ## Directory Listing
+
+### (Feroxbuster) Multiple values
+> @epi052 or [feroxbuster](https://github.com/epi052/feroxbuster)
+```bash
+feroxbuster -u http://127.1 -x pdf -x js,html -x php txt json,docx
+```
 ### (Feroxbuster) Read urls from STDIN; pipe only resulting urls out to another tool
 > @epi052 or [feroxbuster](https://github.com/epi052/feroxbuster)
 ```bash
