@@ -228,3 +228,9 @@ feroxbuster -u http://127.1 -x pdf -x js,html -x php txt json,docx
 ```bash
 cat targets | ./feroxbuster --stdin --silent -s 200 301 302 --redirects -x js | fff -s 200 -o js-files
 ```
+
+# search javascript file
+> @ofjaaah
+```bash
+gau -subs DOMAIN |grep -iE '\.js'|grep -iEv '(\.jsp|\.json)' >> js.txt
+```
