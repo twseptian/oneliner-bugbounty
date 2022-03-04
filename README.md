@@ -240,3 +240,11 @@ cat targets | ./feroxbuster --stdin --silent -s 200 301 302 --redirects -x js | 
 ```bash
 gau -subs DOMAIN |grep -iE '\.js'|grep -iEv '(\.jsp|\.json)' >> js.txt
 ```
+
+## Uncover
+>  [projectdiscovery/uncover](https://github.com/projectdiscovery/uncover)
+```bash
+uncover -q http.title:"GitLab" -silent | httpx -silent | nuclei
+uncover -q target -f ip | naabu
+echo jira | uncover -e shodan,censys -silent
+```
