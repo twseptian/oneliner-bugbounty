@@ -128,6 +128,12 @@ cat targets | waybackurls | anew | grep "=" | gf xss | nilo | Gxss -p test | dal
 cat hosts.txt | ffuf -w - -u "FUZZ/sign-in?next=javascript:alert(1);" -mr "javascript:alert(1)" 
 ```
 
+## Find XSS + knoxss
+> @@ofjaaah
+```bash
+echo "domain" | subfinder -silent | gauplus | grep "=" | uro | gf xss | awk '{ print "curl https://knoxss[.]me/api/v3 -d \"target="$1 "\" -H \"X-API-KEY: APIKNOXSS\""}' | sh 
+```
+
 ## Dump In-Scope Assests from Bounty Program
 ### BugCrowd Programs
 > @dwisiswant0
